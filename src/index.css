@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+/*-resets--*/
+
+
+:root {
+  --color-primary: #6366F1;
+  --color-secondary: #F59E0B;
+  --color-background: #F9FAFB;
+  --color-card: #FFFFFF;
+  --color-text: #1F2937;
+  --color-text-secondary: #6B7280;
+  --color-border: #E5E7EB;
+  --color-income: #10B981;
+  --color-expense: #EF4444;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+}
+
+.sentence-cap{
+  text-transform: none;
+}
+.sentence-cap::first-letter{
+  text-transform: uppercase;
+}
