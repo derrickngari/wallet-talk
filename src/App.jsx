@@ -20,11 +20,18 @@ import CheckoutPage from "./pages/CheckoutPage"
 import AnimatedSection from "./components/AnimatedSection"
 import ProfileDropdown from "./components/ProfileDropdown"
 import ProfilePage from "./pages/ProfilePage"
+import SplashScreen from "./components/SplashScreen"
 
 function App() {
   const [user, setUser] = useState(null)
   const [fullName, setFullName] = useState("")
   const [refreshCount, setrefreshCount] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(()=>{
+    const timer = setTimeout(()=> setIsLoading(false), 2000)
+    return () => clearTimeout(timer)
+  },[])
 
   useEffect(() => {
     const getUserAndProfile = async () => {
@@ -80,9 +87,9 @@ function App() {
     toast.success('Logout successfull!')
   }
 
-  if (!user) {
-    return <AuthForm onAuthSuccess={(u) => setUser(u)} />
-  }
+  if (!user) return <AuthForm onAuthSuccess={(u) => setUser(u)} />
+
+  if (isLoading) return <SplashScreen onComplete={() => setIsLoading(false)} />
 
   return (
     <div className="flex h-screen bg-gray-100 relative">
