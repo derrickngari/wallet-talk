@@ -24,17 +24,17 @@ const Sidebar = () => {
   ]
 
   return (
-    <div className={`bg-white h-screen shadow-lg transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-40'}`}>
+    <div className={`bg-white h-screen shadow-lg transition-all duration-300  ${isCollapsed ? 'w-20' : 'w-40 absolute z-40'}`}>
       <div className="p-4 flex justify-end">
-        <img src={logo} alt="Wallet Talk Logo" className={`w-40 h-auto mx-auto mb-1 mt-2 items-center pl-10 ${isCollapsed ? 'hidden' : ''}`} />
+        <img src={logo} alt="Wallet Talk Logo" className={`w-40 h-auto mx-auto mb-1 mt-3 items-center pl-10 ${isCollapsed ? 'hidden' : ''}`} />
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="p-2 rounded-lg hover:bg-gray-100"
         >
           {isCollapsed ? (
-            <ChevronDoubleRightIcon className="h-5 w-5" />
+            <ChevronDoubleRightIcon onClick={()=> setIsCollapsed(!isCollapsed)} className="h-5 w-5" />
           ) : (
-            <ChevronDoubleLeftIcon className="h-5 w-5" />
+            <ChevronDoubleLeftIcon onClick={()=> setIsCollapsed(!isCollapsed)}  className="h-5 w-5" />
           )}
         </button>
       </div>
@@ -56,7 +56,7 @@ const Sidebar = () => {
             >
               <Icon className="h-6 w-6" />
               {!isCollapsed && (
-                <span className="ml-3">{item.label}</span>
+                <span className="ml-3" onClick={()=> setIsCollapsed(!isCollapsed)} >{item.label}</span>
               )}
             </Link>
           );
