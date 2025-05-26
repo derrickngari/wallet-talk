@@ -1,14 +1,19 @@
 import { useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { supabase } from "../services/supabase"
-import { Cog6ToothIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline"
+import { Cog6ToothIcon, ExclamationCircleIcon, ExclamationTriangleIcon } from "@heroicons/react/24/outline"
 
 const ProfileDropdown = ({ fullName, onLogout }) => {
     const [open, setOpen] = useState(false)
     const dropDownRef = useRef()
     const navigate = useNavigate()
 
-    const initials = fullName?.charAt(0).toUpperCase() || 'U'
+    const initials =fullName 
+    ?  fullName
+        .split(' ')
+        .flatMap((name) => name[0]?.toUpperCase())
+        .join('')
+        .slice(0, 2)
+    : 'U'
 
     useEffect(()=>{
         const handlClickOutside = (e) =>{
@@ -51,6 +56,14 @@ const ProfileDropdown = ({ fullName, onLogout }) => {
                     <span className="flex justify-between">
                         Log out
                         <ExclamationCircleIcon className="h-5 w-5"/>
+                    </span>
+                </button>
+                <button
+                    className="block w-full px-4 py-2 text-left text-sm text-sky-500 hover:bg-gray-100"
+                >
+                    <span className="flex justify-between">
+                        Reset
+                        <ExclamationTriangleIcon className="h-5 w-5"/>
                     </span>
                 </button>
             </div>
