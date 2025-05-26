@@ -36,7 +36,7 @@ function App() {
         return
       }
 
-      setUser(user);
+      setUser(user)
 
       if (user) {
         const { data: profile, error: profileError } = await supabase
@@ -56,7 +56,7 @@ function App() {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       const sessionUser = session?.user || null;
-      setUser(sessionUser);
+      setUser(sessionUser)
 
       if (sessionUser) {
         supabase
@@ -70,7 +70,7 @@ function App() {
 
     getUserAndProfile();
     return () => subscription.unsubscribe();
-  }, []);
+  }, [])
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
@@ -78,7 +78,7 @@ function App() {
   };
 
   if (!user) {
-    return <AuthForm onAuthSuccess={(u) => setUser(u)} />;
+    return <AuthForm onAuthSuccess={(u) => setUser(u)} />
   }
 
   return (

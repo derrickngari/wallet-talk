@@ -1,13 +1,13 @@
 function parseExpenseText(text) {
-    const lowerText = text.toLowerCase();
+    const lowerText = text.toLowerCase()
 
     // Match amount like: "cash 500", "500 shillings", "spent 300"
-    const amountMatch = lowerText.match(/(?:cash\s*)?(\d+)(?:\s*(?:shillings|ksh|sh))?/i);
-    const amount = amountMatch ? parseInt(amountMatch[1]) : null;
+    const amountMatch = lowerText.match(/(?:cash\s*)?(\d+)(?:\s*(?:shillings|ksh|sh))?/i)
+    const amount = amountMatch ? parseInt(amountMatch[1]) : null
 
     // Match category: "on food", "on transport"
-    const categoryMatch = lowerText.match(/on\s+(\w+)/i);
-    const category = categoryMatch ? categoryMatch[1] : "general";
+    const categoryMatch = lowerText.match(/on\s+(\w+)/i)
+    const category = categoryMatch ? categoryMatch[1] : "general"
 
     return {
         type: "expense",
@@ -15,21 +15,21 @@ function parseExpenseText(text) {
         category,
         description: text.trim(),
         currency: "KES"
-    };
+    }
 }
 
 function parseIncomeText(text) {
-    const lowerText = text.toLowerCase();
+    const lowerText = text.toLowerCase()
 
     // Match amount like: "received 500", "got 500", "500 shillings", "shillings 500"
-    const amountMatch = lowerText.match(/(\d+)\s*(?:shillings|ksh|sh)?|(?:shillings|ksh|sh)\s*(\d+)/i);
+    const amountMatch = lowerText.match(/(\d+)\s*(?:shillings|ksh|sh)?|(?:shillings|ksh|sh)\s*(\d+)/i)
     const amount = amountMatch
         ? parseInt(amountMatch[1] || amountMatch[2])
-        : null;
+        : null
 
     // Match category like: "from job", "from freelance"
-    const categoryMatch = lowerText.match(/from\s+(\w+)/i);
-    const category = categoryMatch ? categoryMatch[1] : "general";
+    const categoryMatch = lowerText.match(/from\s+(\w+)/i)
+    const category = categoryMatch ? categoryMatch[1] : "general"
 
     return {
         type: "income",
@@ -37,7 +37,7 @@ function parseIncomeText(text) {
         category,
         description: text.trim(),
         currency: "KES"
-    };
+    }
 }
 
 export function startSpeechRecognition(callback) {
@@ -45,19 +45,19 @@ export function startSpeechRecognition(callback) {
 
     if (!SpeechRecognition) {
         console.error("Speech recognition not supported in this browser");
-        return;
+        return
     }
 
-    const recognition = new SpeechRecognition();
-    recognition.lang = "en-US";
-    recognition.continuous = false;
-    recognition.interimResults = false;
+    const recognition = new SpeechRecognition()
+    recognition.lang = "en-US"
+    recognition.continuous = false
+    recognition.interimResults = false
 
     recognition.onresult = (e) => {
-        const transcript = e.results[0][0].transcript.toLowerCase();
-        console.log("Transcript:", transcript);
+        const transcript = e.results[0][0].transcript.toLowerCase()
+        console.log("Transcript:", transcript)
 
-        let data;
+        let data
 
         if (transcript.includes("spent") || transcript.includes("bought") || transcript.includes("paid")) {
             data = parseExpenseText(transcript);
@@ -69,16 +69,16 @@ export function startSpeechRecognition(callback) {
                 amount: null,
                 description: transcript,
                 currency: "KES"
-            };
+            }
         }
 
-        console.log("Parsed data:", data);
-        callback(data);
-    };
+        console.log("Parsed data:", data)
+        callback(data)
+    }
 
     recognition.onerror = (e) => {
-        console.error("Speech recognition error:", e.error);
-    };
+        console.error("Speech recognition error:", e.error)
+    }
 
-    recognition.start();
+    recognition.start()
 }

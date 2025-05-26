@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getTransactions } from '../services/transactionService'
 
 const TransactionList = ({ user }) => {

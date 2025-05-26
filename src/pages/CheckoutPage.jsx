@@ -1,8 +1,7 @@
-import React from 'react'
 
 const CheckoutPage = ({ user }) => {
   return (
-    <div>CheckoutPage</div>
+    <div>CheckoutPage coming soon</div>
   )
 }
 

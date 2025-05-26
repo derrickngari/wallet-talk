@@ -59,13 +59,13 @@ const IncomePage = ({ user }) => {
       value: amount
     }))
 
-    setCategoryData(categoryChartData);
+    setCategoryData(categoryChartData)
 
     // Process monthly data
     const monthlyTotals = data.reduce((acc, income) => {
       const month = new Date(income.created_at).toLocaleString('default', { month: 'short' })
       acc[month] = (acc[month] || 0) + income.amount
-      return acc;
+      return acc
     }, {})
 
     const monthlyChartData = Object.entries(monthlyTotals).map(([month, amount]) => ({

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { startSpeechRecognition } from '../services/voiceInput'
 import { saveTransaction } from '../services/transactionService'
 import { toast } from 'react-toastify'
 
 const VoiceInput = ({ user, onSave }) => {
-    const [isListening, setIsListening] = useState(false);
-    const [transcript, setTranscript] = useState('');
-    const [parsedData, setParsedData] = useState(null);
+    const [isListening, setIsListening] = useState(false)
+    const [transcript, setTranscript] = useState('')
+    const [parsedData, setParsedData] = useState(null)
 
 
 
@@ -14,9 +14,9 @@ const VoiceInput = ({ user, onSave }) => {
         setIsListening(true);
 
         startSpeechRecognition(async(data) => {
-            console.log("Parsed data:", data);
-            setTranscript(data.description);
-            setParsedData(data);
+            console.log("Parsed data:", data)
+            setTranscript(data.description)
+            setParsedData(data)
             
             if (!data.amount) {
                 toast.error('Couldn\'t detect amount. Please try again.')
@@ -37,7 +37,7 @@ const VoiceInput = ({ user, onSave }) => {
                     onSave && onSave()
                 }
             } else {
-                console.warn('You\'re not logged in. Please sign in!.');
+                console.warn('You\'re not logged in. Please sign in!.')
             }
         });
         setIsListening(false);

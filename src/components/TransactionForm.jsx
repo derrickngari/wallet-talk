@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { saveTransaction } from '../services/transactionService'
 import { toast } from 'react-toastify'
-import { Input } from 'postcss'
 
 const TransactionForm = ({ user, onSave }) => {
     const [type, setType] = useState('expense')
@@ -53,7 +52,7 @@ const TransactionForm = ({ user, onSave }) => {
                     name='type'
                     value='expense'
                     checked={type === 'expense'}
-                    onChange={(e) => setType('expense')} 
+                    onChange={() => setType('expense')} 
                 />
                 Expense
             </label>    
@@ -63,7 +62,7 @@ const TransactionForm = ({ user, onSave }) => {
                     name='type'
                     value='income'
                     checked={type === 'income'}
-                    onChange={(e) => setType('income')} 
+                    onChange={() => setType('income')} 
                 />
                 Income
             </label>    

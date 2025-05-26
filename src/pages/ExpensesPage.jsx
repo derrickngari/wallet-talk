@@ -13,15 +13,15 @@ import {
   Pie,
   Cell
 } from 'recharts'
-import CountUp from 'react-countup';
+import CountUp from 'react-countup'
 
 const ExpensesPage = ({ user }) => {
-  const [expenses, setExpenses] = useState([]);
-  const [categoryData, setCategoryData] = useState([]);
-  const [monthlyData, setMonthlyData] = useState([]);
+  const [expenses, setExpenses] = useState([])
+  const [categoryData, setCategoryData] = useState([])
+  const [monthlyData, setMonthlyData] = useState([])
   const [totalexpenses, setTotalExpenses] = useState(0)
 
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8']
 
   useEffect(() => {
     if (user) {
@@ -35,7 +35,7 @@ const ExpensesPage = ({ user }) => {
       .select('*')
       .eq('user_id', user.id)
       .eq('type', 'expense')
-      .order('created_at', { ascending: false });
+      .order('created_at', { ascending: false })
 
     if (error) {
       console.error('Error fetching expenses:', error)
@@ -50,31 +50,31 @@ const ExpensesPage = ({ user }) => {
   const processData = (data) => {
     // Process category data
     const categoryTotals = data.reduce((acc, expense) => {
-      acc[expense.category] = (acc[expense.category] || 0) + expense.amount;
-      return acc;
-    }, {});
+      acc[expense.category] = (acc[expense.category] || 0) + expense.amount
+      return acc
+    }, {})
 
     const categoryChartData = Object.entries(categoryTotals).map(([category, amount]) => ({
       name: category,
       value: amount
-    }));
+    }))
 
     setCategoryData(categoryChartData);
 
     // Process monthly data
     const monthlyTotals = data.reduce((acc, expense) => {
-      const month = new Date(expense.created_at).toLocaleString('default', { month: 'short' });
-      acc[month] = (acc[month] || 0) + expense.amount;
-      return acc;
-    }, {});
+      const month = new Date(expense.created_at).toLocaleString('default', { month: 'short' })
+      acc[month] = (acc[month] || 0) + expense.amount
+      return acc
+    }, {})
 
     const monthlyChartData = Object.entries(monthlyTotals).map(([month, amount]) => ({
       name: month,
       amount: amount
-    }));
+    }))
 
-    setMonthlyData(monthlyChartData);
-  };
+    setMonthlyData(monthlyChartData)
+  }
 
   return (
     <div className="p-6">

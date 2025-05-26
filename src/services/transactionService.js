@@ -1,7 +1,7 @@
 import { supabase } from './supabase'
 
 export const saveTransaction = async (saveTransaction, userId) => {
-    const { type, amount, category, description, currency } = saveTransaction;
+    const { type, amount, category, description, currency } = saveTransaction
 
     const { data, error } = await supabase
         .from('transactions')
@@ -14,12 +14,12 @@ export const saveTransaction = async (saveTransaction, userId) => {
                 description,
                 currency
             }
-        ]);
+        ])
 
         if (error){
-            console.error('Failed to save transaction:', error.message);
+            console.error('Failed to save transaction:', error.message)
         } else {
-            console.log('Transaction saved successfully:', data);
+            console.log('Transaction saved successfully:', data)
         }
 
         return { data, error} 

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getTransactions } from '../services/transactionService'
-import { supabase } from '../services/supabase'
 import CountUp from 'react-countup'
 
 const SummaryCards = ({ user, refreshCount }) => {
@@ -30,9 +29,6 @@ const SummaryCards = ({ user, refreshCount }) => {
 
         fetchData()
     }, [user, refreshCount])
-
-    // const totalBalance = totalIncome - totalExpense
-    // setBalance(totalBalance)
 
   return (
     <div className='grid grid-cols-1 md:grid-cols-3 gap-4 my-6'>

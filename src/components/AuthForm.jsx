@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { supabase } from '../services/supabase'
 import logo from '../assets/wallet-talk-logo.svg'
 import { ToastContainer, toast } from 'react-toastify'
@@ -12,32 +12,53 @@ const AuthForm = ({ onAuthSuccess }) => {
     const [error, setError] = useState(null)
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        setError('')
+  e.preventDefault()
+  setError('')
 
-        const {data, error} = isSignUp
-        ? 
-        await supabase.auth.signUp({ email, password })
-        : await supabase.auth.signInWithPassword({ email, password })
+  try {
+    if (isSignUp) {
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: name, 
+          },
+        },
+      });
 
-        if (isSignUp) { 
-            await supabase('users').insert([
-                {
-                    id: userId,
-                    email: email,
-                    full_name: name
-                }
-            ])
+      if (signUpError) throw signUpError
+
+      // After signup, insert into the users table
+      const userId = data.user?.id
+      if (userId) {
+        const { error: insertError } = await supabase
+          .from('users')
+          .insert([{ id: userId, email, full_name: name }])
+
+        if (insertError) {
+          throw insertError
         }
-        if (error) {
-            setError(error.message)
-            toast.error(error.message)
-        }
-        else{
-            onAuthSuccess(data.user)
-            toast.success("Signup successful! Please check your email to confirm.")
+      }
+
+      toast.success('Signup successful! Please check your email to confirm.');
+    } else {
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+
+      if (signInError) throw signInError
+
+      toast.success('Login successful!')
+      onAuthSuccess(data.user)
     }
-    }
+  } catch (err) {
+    setError(err.message)
+    toast.error(err.message)
+  }
+}
+
 
   return (
     <div className='flex items-center justify-center flex-col'>

@@ -1,8 +1,7 @@
-import React from 'react'
 
 const BudgetsPage = () => {
   return (
-    <div>BudgetsPage</div>
+    <div>BudgetsPage coming soon</div>
   )
 }
 
