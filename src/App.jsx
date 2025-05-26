@@ -9,7 +9,7 @@ import SideBar from "./components/SideBar"
 import ExpensesPage from "./pages/ExpensesPage"
 import IncomePage from "./pages/IncomePage"
 import NotFound from "./pages/NotFound"
-import { ToastContainer } from "react-toastify"
+import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/ReactToastify.css"
 import TransactionForm from "./components/TransactionForm"
 import logo from "./assets/wallet-talk-logo.svg"
@@ -18,6 +18,8 @@ import ThemeToggle from "./components/ThemeToggle"
 import PricingPage from "./pages/PricingPage"
 import CheckoutPage from "./pages/CheckoutPage"
 import AnimatedSection from "./components/AnimatedSection"
+import ProfileDropdown from "./components/ProfileDropdown"
+import ProfilePage from "./pages/ProfilePage"
 
 function App() {
   const [user, setUser] = useState(null)
@@ -69,20 +71,21 @@ function App() {
     });
 
     getUserAndProfile();
-    return () => subscription.unsubscribe();
+    return () => subscription.unsubscribe()
   }, [])
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
     setUser(null)
-  };
+    toast.success('Logout successfull!')
+  }
 
   if (!user) {
     return <AuthForm onAuthSuccess={(u) => setUser(u)} />
   }
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-100 relative">
       <SideBar />
       <ToastContainer
         position="top-right"
@@ -105,12 +108,16 @@ function App() {
               />
               <div>
                 {/* <ThemeToggle /> */}
-                <button 
+                {/* <button 
                 className="self-start sm:self-center bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                 onClick={handleLogout}
                 >
                   Logout
-                </button>
+                </button> */}
+                <ProfileDropdown
+                  fullName={fullName}
+                  onLogout={handleLogout}
+                />
               </div>
             </div>
 
@@ -156,6 +163,7 @@ function App() {
             <Route path="/budgets" element={<BudgetsPage user={user} />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/checkout" element={<CheckoutPage user={user} />} />
+            <Route path="/profile" element={<ProfilePage user={user} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
