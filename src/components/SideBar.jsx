@@ -6,7 +6,8 @@ import {
   ArrowTrendingDownIcon,
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
-  BanknotesIcon
+  BanknotesIcon,
+  CreditCardIcon
 } from '@heroicons/react/24/outline';
 import logo from '../assets/wallet-talk-logo.svg'
 
@@ -18,7 +19,8 @@ const Sidebar = () => {
     { path: '/', icon: HomeIcon, label: 'Dashboard' },
     { path: '/income', icon: ArrowTrendingUpIcon, label: 'Income' },
     { path: '/expenses', icon: ArrowTrendingDownIcon, label: 'Expenses' },
-    { path: '/budgets', icon: BanknotesIcon, label: 'Budgets'}
+    { path: '/budgets', icon: BanknotesIcon, label: 'Budgets'},
+    { path: '/pricing', icon: CreditCardIcon, label: 'Pricing'}
   ]
 
   return (
