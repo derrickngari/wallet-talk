@@ -24,7 +24,7 @@ const Sidebar = () => {
   ]
 
   return (
-    <div className={`bg-white h-screen shadow-lg transition-all duration-300  ${isCollapsed ? 'w-20' : 'w-40 absolute z-40'}`}>
+    <div className={`bg-white h-screen shadow-lg transition-all duration-300  ${isCollapsed ? 'w-20' : 'w-40 absolute md:relative z-40'}`}>
       <div className="p-4 flex justify-end">
         <img src={logo} alt="Wallet Talk Logo" className={`w-40 h-auto mx-auto mb-1 mt-3 items-center pl-10 ${isCollapsed ? 'hidden' : ''}`} />
         <button
