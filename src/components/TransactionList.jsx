@@ -56,7 +56,7 @@ const TransactionList = ({ user }) => {
 
     //export to csv
     const exportToCSV = () => {
-        const headers =['Type', 'Category', 'Amount', 'Description', 'Date']
+        const headers =['Type', 'Category', 'Amount', 'Currency', 'Description', 'Date']
         const rows = filtered.map(tx => [
             tx.type,
             tx.category,
