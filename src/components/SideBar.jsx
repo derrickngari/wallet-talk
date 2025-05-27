@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom'
 import { 
   HomeIcon, 
   ArrowTrendingUpIcon, 
@@ -7,8 +7,10 @@ import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
   BanknotesIcon,
-  CreditCardIcon
-} from '@heroicons/react/24/outline';
+  CreditCardIcon,
+  InboxStackIcon,
+  CurrencyDollarIcon,
+} from '@heroicons/react/24/outline'
 import logo from '../assets/wallet-talk-logo.svg'
 
 const Sidebar = () => {
@@ -20,7 +22,9 @@ const Sidebar = () => {
     { path: '/income', icon: ArrowTrendingUpIcon, label: 'Income' },
     { path: '/expenses', icon: ArrowTrendingDownIcon, label: 'Expenses' },
     { path: '/budgets', icon: BanknotesIcon, label: 'Budgets'},
-    { path: '/pricing', icon: CreditCardIcon, label: 'Pricing'}
+    { path: '/savings', icon: InboxStackIcon, label: 'Savings'},
+    { path: '/investments', icon: CurrencyDollarIcon, label: 'Investments' },
+    { path: '/pricing', icon: CreditCardIcon, label: 'Pricing'},
   ]
 
   return (

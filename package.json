@@ -13,6 +13,8 @@
     "@heroicons/react": "^2.2.0",
     "@supabase/supabase-js": "^2.49.8",
     "@tailwindcss/vite": "^4.1.7",
+    "@web3icons/react": "^4.0.13",
+    "crypto-icons-svg": "^1.8.9",
     "dotenv": "^16.5.0",
     "framer-motion": "^12.12.2",
     "react": "^19.1.0",

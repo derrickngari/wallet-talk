@@ -48,6 +48,7 @@ WalletTalk is a mobile-first web application that enables users to:
 | Deployment         | Vercel                       |
 | Charts & Graphs    | Recharts                     |
 | Toasts & Alerts    | React Toastify               |
+|Icons               | Heroicons                    |
 
 ---
 

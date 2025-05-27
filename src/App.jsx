@@ -87,9 +87,9 @@ function App() {
     toast.success('Logout successfull!')
   }
 
-  if (!user) return <AuthForm onAuthSuccess={(u) => setUser(u)} />
-
   if (isLoading) return <SplashScreen onComplete={() => setIsLoading(false)} />
+  
+  if (!user) return <AuthForm onAuthSuccess={(u) => setUser(u)} />
 
   return (
     <div className="flex h-screen bg-gray-100 relative">
@@ -171,7 +171,7 @@ function App() {
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/checkout" element={<CheckoutPage user={user} />} />
             <Route path="/profile" element={<ProfilePage user={user} />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<NotFound user={user} />} />
           </Routes>
         </div>
       </div>

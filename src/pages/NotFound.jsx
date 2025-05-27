@@ -1,18 +1,18 @@
 import { useNavigate } from 'react-router'
 
-const NotFound = () => {
+const NotFound = ({ user }) => {
   const navigate = useNavigate()
 
   return (
-    <>
-      <div className='text-5xl flex justify-center items-center min-h-[50vh]'>404 | NotFound</div>
+    <div className='flex flex-col justify-center items-center min-h-[50vh]'>
+      <h1 className='text-5xl '>404 | NotFound</h1>
       <button
-        className='bg-[#F59E0B] py-2 px-4 cursor-pointer text-white rounded mt-10 mx-auto'
-        onClick={() => navigate('/')}
+        className='bg-[#F59E0B] py-2 px-4 cursor-pointer text-white rounded mt-12 mx-auto'
+        onClick={user ? navigate('/dashboard') : () => navigate('/')}
       >
-          Home Page
+        Home Page
       </button>
-    </>
+    </div>
   )
 }
 

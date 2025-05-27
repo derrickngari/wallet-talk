@@ -90,7 +90,7 @@ const ProfilePage = ({ user }) => {
                 <option value="EUR">EUR</option>
             </select>
 
-            <div className='flex flex-col md:flex-row  items-center gap-4'>
+            <div className='flex flex-col  md:flex-row items-center gap-4'>
                 {profile.avatar_url && (
                     <img 
                         src={profile.avatar_url} 
@@ -102,7 +102,7 @@ const ProfilePage = ({ user }) => {
                     type="file"
                     accept='image/*'
                     onChange={(e) => setAvatarFile(e.target.files[0])}
-                    className='text-sm' 
+                    className='text-sm mx-auto' 
                 />
                 <button
                     type='button'
