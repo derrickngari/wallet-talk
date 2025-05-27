@@ -1,25 +1,39 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../services/supabase"
 import { toast } from "react-toastify"
+import BudgetCard from "./BudgetCard"
 
-const BudgetsPage = ({ user }) => {
+const BudgetsPage = ({ user, refreshCount }) => {
   const [budgets, setBudgets] = useState([])
+  const [expenses, setExpenses] = useState([])
   const [category, setCategory] = useState('')
   const [amount,setAmount] = useState('')
   const [period, setPeriod] = useState('monthly')
 
   useEffect(()=> {
-    if (user?.id) fetchBudgets()
-  }, [user])
+    if (user?.id) fetchBudgetsAndExppenses()
+  }, [user, refreshCount])
 
-  const fetchBudgets = async () => {
-    const { data, error } = await supabase
+  const fetchBudgetsAndExppenses = async () => {
+    try {const { data: budgetsData, error: budgetsError } = await supabase
       .from('budgets')
       .select('*')
       .eq('user_id', user.id)
 
-      if (error) toast.error('Failed to fetch budgets.')
-      else setBudgets(data)
+      if (budgetsError) toast.error('Failed to fetch budgets.')
+      setBudgets(budgetsData)
+
+      const { data:expenseData, error: expenseError } = await supabase
+        .from('transactions')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('type', 'expense')
+
+      if (expenseError) toast.error('Failed to fetch expenses.')
+      setExpenses(expenseData)
+    } catch (err) {
+      toast.error('Failed to fetch budgets or expenses')
+    }
   }
 
   const handleAddBudget = async (e) => {
@@ -44,8 +58,14 @@ const BudgetsPage = ({ user }) => {
         setCategory('')
         setAmount('')
         setPeriod('monthly')
-        fetchBudgets()
+        fetchBudgetsAndExppenses()
       }
+  }
+
+  const getSpentAmount = (category) => {
+    return expenses
+      .filter((exp) => exp.category === category)
+      .reduce((sum, exp) => sum + exp.amount, 0)
   }
 
   return (
@@ -85,21 +105,18 @@ const BudgetsPage = ({ user }) => {
       </form>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {budgets.map((b) => (
-          <div key={b.id} className="bg-white p-4  rounded shadow">
-            <h1 className="text-lg font-semibold capitalize">{b.category}</h1>
-            <p className="text-sm text-gray-500">Limit: KES {b.amount} / {b.period}</p>
+        {budgets.map((b) => {
+          const spent = getSpentAmount(b.category)
+          const percent = Math.min((spent / b.amount) * 100, 100).toFixed(0)
 
-            {/* progress bar */}
-            <div className="h-2 bg-gray-200 rounded mt-2">
-              <div
-                className="h-2 bg-[#F59E0B] rounded"
-                style={{ width: '30%'}}
-              />
-            </div>
-            <p className="text-xs text-gray-500 mt-1 py-2 mx-auto">KES 300 spent</p>
-          </div>
-        ))}
+          return (
+            <BudgetCard 
+              spent={spent} 
+              percent={percent} 
+              b={b}
+            />
+        ) 
+        })}
       </div>
     </div>
   )

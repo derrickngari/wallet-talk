@@ -77,12 +77,16 @@ const ExpensesPage = ({ user }) => {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-6 w-full">
       <h1 className="text-2xl font-bold mb-6">Expenses Overview</h1>
-      <div className="bg-red-100 border-l-4 border-red-500 py-10 px-8 rounded shadow-md transition transform duration-500 ease-out hover:scale-105  mb-6">
-        <h3 className='text-sm text-gray-700'>Total Expenses</h3>
-        <p className='text-xl font-bold text-red-700'>KES <CountUp start={0} end={totalexpenses} duration={1.5} separator=',' /></p>
-        </div>
+      <div className="bg-red-100 w-full border-l-4 border-red-500 py-10 px-8 rounded shadow-md transition transform duration-500 ease-out hover:scale-105 mb-6">
+          <div className='flex gap-5 my-auto items-center'>
+              <span>
+              <h3 className='text-sm text-gray-700'>Total Expenses</h3>
+              <p className='text-xl font-bold text-red-700'>KES <CountUp start={0} end={totalexpenses} duration={1.5} separator=',' /></p>
+          </span>
+          </div>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Monthly Expenses Chart */}
         <div className="bg-white p-4 rounded-lg shadow">

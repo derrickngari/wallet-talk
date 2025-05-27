@@ -23,6 +23,9 @@ button {
   cursor: pointer;
   outline: none;
 }
+input{
+  outline: none;
+}
 
 .sentence-cap{
   text-transform: none;

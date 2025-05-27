@@ -90,7 +90,7 @@ const ProfilePage = ({ user }) => {
                 <option value="EUR">EUR</option>
             </select>
 
-            <div className='flex flex-col  md:flex-row items-center gap-4'>
+            <div className='flex flex-col  md:flex-row mx-auto items-center gap-4'>
                 {profile.avatar_url && (
                     <img 
                         src={profile.avatar_url} 
@@ -115,7 +115,7 @@ const ProfilePage = ({ user }) => {
 
             <button
                 type='submit'
-                className='bg-green-400 text-white px-3 py-2 rounded'
+                className='bg-green-400 text-white px-3 py-2 rounded mx-auto items-center'
             >
                 Save Changes
             </button>

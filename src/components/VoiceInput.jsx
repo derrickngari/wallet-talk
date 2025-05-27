@@ -44,7 +44,7 @@ const VoiceInput = ({ user, onSave }) => {
     };
 
     return (
-        <div className="p-4 bg-white rounded-2xl shadow-md">
+        <div className="p-4 bg-white items-center mx-auto  rounded-2xl shadow-md">
             <button
                 onClick={handleVoice}
                 className="bg-[#F59E0B] text-white px-4 py-2 rounded-md"

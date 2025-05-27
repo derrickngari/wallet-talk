@@ -17,6 +17,8 @@
     "crypto-icons-svg": "^1.8.9",
     "dotenv": "^16.5.0",
     "framer-motion": "^12.12.2",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
     "react": "^19.1.0",
     "react-countup": "^6.5.3",
     "react-dom": "^19.1.0",
@@ -28,7 +30,8 @@
     "react-toastify": "^11.0.5",
     "recharts": "^2.15.3",
     "supabase": "^2.23.4",
-    "tailwindcss": "^4.1.7"
+    "tailwindcss": "^4.1.7",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

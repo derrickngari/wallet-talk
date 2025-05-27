@@ -21,6 +21,8 @@ import AnimatedSection from "./components/AnimatedSection"
 import ProfileDropdown from "./components/ProfileDropdown"
 import ProfilePage from "./pages/ProfilePage"
 import SplashScreen from "./components/SplashScreen"
+import SavingsPage from "./pages/SavingsPage"
+import InvestmentsPage from "./pages/InvestmentsPage"
 
 function App() {
   const [user, setUser] = useState(null)
@@ -88,7 +90,7 @@ function App() {
   }
 
   if (isLoading) return <SplashScreen onComplete={() => setIsLoading(false)} />
-  
+
   if (!user) return <AuthForm onAuthSuccess={(u) => setUser(u)} />
 
   return (
@@ -165,9 +167,11 @@ function App() {
                 </>
               }
             />
-            <Route path="/expenses" element={<ExpensesPage user={user} />} />
+            <Route path="/expenses" element={<ExpensesPage user={user} refreshCount={refreshCount} />} />
             <Route path="/income" element={<IncomePage user={user} />} />
             <Route path="/budgets" element={<BudgetsPage user={user} />} />
+            <Route path="/savings" element={<SavingsPage user={user} />} />
+            <Route path="/investments" element={<InvestmentsPage user={user} />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/checkout" element={<CheckoutPage user={user} />} />
             <Route path="/profile" element={<ProfilePage user={user} />} />
