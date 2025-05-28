@@ -70,12 +70,10 @@ const TransactionList = ({ user }) => {
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
         const link = document.createElement('a')
         link.href = URL.createObjectURL(blob)
-        link.setAttribute('download', 'tranactions.csv')
+        link.setAttribute('download', 'transactions.csv')
         document.body.appendChild(link)
         link.click()
         document.removeChild(link)
-
-
     }
 
     //export to pdf
@@ -125,7 +123,7 @@ const TransactionList = ({ user }) => {
     const exportToExcel = () => {
         const worksheet = XLSX.utils.json_to_sheet(filtered)
         const workbook = XLSX.utils.book_new()
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'Tranactions')
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Transactions')
         XLSX.writeFile(workbook, 'transactions.xlsx')
     }
 

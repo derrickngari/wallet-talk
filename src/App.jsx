@@ -89,6 +89,13 @@ function App() {
     toast.success('Logout successfull!')
   }
 
+  const greetinhMessage = ()  => {
+    const hour = new Date().getHours()
+    if (hour < 12) return 'Good Morning'
+    if (hour >= 12 && hour <= 18) return 'Good Afternoon'
+    else return 'Good Evening'
+  }
+
   if (isLoading) return <SplashScreen onComplete={() => setIsLoading(false)} />
 
   if (!user) return <AuthForm onAuthSuccess={(u) => setUser(u)} />
@@ -131,8 +138,8 @@ function App() {
             </div>
 
             {/* welcome message */}
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
-              Welcome, {fullName ? fullName.split(" ")[0] : user.email}
+            <h1 className=" sm:text-2xl font-bold text-gray-900">
+              {greetinhMessage()}, {fullName ? fullName.split(" ")[0] : user.email}
             </h1>
           </div>
 
