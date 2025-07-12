@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../services/supabase"
-import { toast } from "react-toastify"
-import BudgetCard from "./BudgetCard"
+import { toast } from "react-hot-toast"
+import BudgetCard from "../components/BudgetCard"
 
 const BudgetsPage = ({ user, refreshCount }) => {
   const [budgets, setBudgets] = useState([])
@@ -70,27 +70,30 @@ const BudgetsPage = ({ user, refreshCount }) => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Budgets</h1>
+      <h1 className="text-2xl text-gray-200 font-bold mb-4">Budgets</h1>
 
-      <form onSubmit={handleAddBudget} className="mb-6 flex flex-col md:flex-row  gap-4">
-        <input 
-          type="text" 
+      <form
+        onSubmit={handleAddBudget}
+        className="mb-6 items-center grid md:grid-cols-3 gap-4"
+      >
+        <input
+          type="text"
           placeholder="Category"
           value={category}
-          onChange={(e)=> setCategory(e.target.value)}
-          className="px-3 py-2 border rounded outline-none w-full" 
+          onChange={(e) => setCategory(e.target.value)}
+          className="w-full text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded outline-none"
         />
-        <input 
-          type="number" 
+        <input
+          type="number"
           placeholder="Amount (KES)"
           value={amount}
-          onChange={(e)=> setAmount(e.target.value)}
-          className="px-3 py-2 border rounded outline-none w-full" 
+          onChange={(e) => setAmount(e.target.value)}
+          className="w-full text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded outline-none"
         />
         <select
           value={period}
-          onChange={(e)=> setPeriod(e.target.value)}
-          className="px-3 py-2 border rounded w-full"
+          onChange={(e) => setPeriod(e.target.value)}
+          className="w-full text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded outline-none"
         >
           <option value="weekly">Weekly</option>
           <option value="monthly">Monthly</option>
@@ -98,7 +101,7 @@ const BudgetsPage = ({ user, refreshCount }) => {
         </select>
         <button
           type="submit"
-          className="bg-[#F59E0B] text-white px-4 py-2 rounded"
+          className="bg-purple-600 md:w-1/3 hover:bg-purple-700 py-2 px-4 text-white  rounded"
         >
           Add Bugdet
         </button>
@@ -106,20 +109,14 @@ const BudgetsPage = ({ user, refreshCount }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {budgets.map((b) => {
-          const spent = getSpentAmount(b.category)
-          const percent = Math.min((spent / b.amount) * 100, 100).toFixed(0)
+          const spent = getSpentAmount(b.category);
+          const percent = Math.min((spent / b.amount) * 100, 100).toFixed(0);
 
-          return (
-            <BudgetCard 
-              spent={spent} 
-              percent={percent} 
-              b={b}
-            />
-        ) 
+          return <BudgetCard spent={spent} percent={percent} b={b} />;
         })}
       </div>
     </div>
-  )
+  );
 }
 
 export default BudgetsPage

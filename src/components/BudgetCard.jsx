@@ -3,14 +3,14 @@ import React from 'react'
 const BudgetCard = ({ spent, b, percent }) => {
     
   return (
-    <div key={b.id} className="bg-white p-4  rounded shadow">
+    <div key={b.id} className="p-4 bg-black/30 border border-gray-500/40 text-white rounded-2xl  mt-4 shadow">
         <h3 className="text-lg font-semibold capitalize">{b.category}</h3>
         <p className="text-sm text-gray-500">Limit: KES {b.amount} / {b.period}</p>
 
         {/* progress bar */}
-        <div className="h-2 bg-gray-200 rounded mt-2">
+        <div className="h-1.5 bg-gray-800 rounded mt-2">
             <div
-            className={`h-2 ${percent < 100 ? 'bg-[#F59E0B]' : 'bg-red-500' } rounded`}
+            className={`h-2 ${percent < 100 ? 'bg-purple-600' : 'bg-red-500' } rounded`}
             style={{ width: `${percent}%` }}
             />
         </div>

@@ -30,13 +30,13 @@ const ProfileDropdown = ({ fullName, onLogout }) => {
     <div className="relative" ref={dropDownRef}>
         <button
             onClick={()=> setOpen(!open)}
-            className="w-10 h-10 rounded-full absolute right-0 top-[-15px] bg-[#F59E0B] text-white font-bold flex items-center justify-center focus:outline-none"
+            className="w-10 h-10 rounded-full absolute right-0 top-[-15px] bg-purple-600 text-gray-300 font-bold flex items-center justify-center focus:outline-none"
             title="Profile"
         >
             {initials}
         </button>
         {open && (
-            <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md overflow-hidden z-20">
+            <div className="absolute right-0 mt-8 w-48 p-4 bg-black/80 border border-gray-500/40 text-white rounded-2xl shadow-md overflow-hidden z-20">
                 <button
                     onClick={() => {
                         navigate('/profile')
@@ -44,7 +44,7 @@ const ProfileDropdown = ({ fullName, onLogout }) => {
                     }}
                     className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
                 >
-                    <span className="flex justify-between">
+                    <span className="flex text-gray-400 justify-between">
                         Profile Settings
                         <Cog6ToothIcon className="h-5 w-5"/>
                     </span>

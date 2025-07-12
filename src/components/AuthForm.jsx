@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { supabase } from '../services/supabase'
 import logo from '../assets/wallet-talk-logo.svg'
-import { ToastContainer, toast } from 'react-toastify'
+import {toast} from 'react-hot-toast'
 
 const AuthForm = ({ onAuthSuccess }) => {
   const [name, setName] = useState('')
@@ -16,7 +16,6 @@ const AuthForm = ({ onAuthSuccess }) => {
 
     try {
       if (isSignUp) {
-        // Sign up with full_name stored in user_metadata
         const { data, error: signUpError } = await supabase.auth.signUp({
           email,
           password,
@@ -39,20 +38,19 @@ const AuthForm = ({ onAuthSuccess }) => {
 
         const user = data.user
 
-        // Write to the users table only after successful login
         const { error: insertError } = await supabase
           .from('users')
           .upsert([
             {
               id: user.id,
               email: user.email,
-              full_name: user.user_metadata?.full_name || '', // fallback
+              full_name: user.user_metadata?.full_name || '', 
             },
           ])
 
         if (insertError) throw insertError
 
-        toast.success('Login successful!')
+        toast.success("Login successful!");
         onAuthSuccess(user)
       }
     } catch (err) {
@@ -62,14 +60,12 @@ const AuthForm = ({ onAuthSuccess }) => {
   };
 
   return (
-    <div className="flex items-center justify-center flex-col min-h-screen bg-gray-50 px-4">
-      <ToastContainer />
-      <div className="max-w-sm mx-auto p-6 bg-white rounded-2xl shadow-md w-full">
+    <div className="flex items-center justify-center flex-col min-h-screen bg-gray-900 px-4">
+      <div className="max-w-sm mx-auto p-6 bg-black/30 border border-gray-500/40 text-white space-y-4 my-6 rounded-2xl shadow-md w-full">
         <img src={logo} alt="WalletTalk Logo" className="w-32 h-auto mx-auto mb-4" />
         <h2 className="text-2xl font-semibold mb-4 text-center">
-          {isSignUp ? 'Sign Up' : 'Sign In'}
+          {isSignUp ? 'Create account' : 'Welcome back'}
         </h2>
-
         <form onSubmit={handleSubmit} className="space-y-4">
           {isSignUp && (
             <input
@@ -77,7 +73,7 @@ const AuthForm = ({ onAuthSuccess }) => {
               placeholder="Enter Your Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full border px-3 py-2 rounded outline-none"
+              className="w-full text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-3 rounded outline-none"
               required
             />
           )}
@@ -86,7 +82,7 @@ const AuthForm = ({ onAuthSuccess }) => {
             placeholder="Enter Your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border px-3 py-2 rounded outline-none"
+            className="w-full text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-3 rounded outline-none"
             required
           />
           <input
@@ -94,12 +90,12 @@ const AuthForm = ({ onAuthSuccess }) => {
             placeholder="Enter Your Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border px-3 py-2 rounded outline-none"
+            className="w-full text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-3 rounded outline-none"
             required
           />
           <button
             type="submit"
-            className="w-full bg-[#F59E0B] text-white py-2 rounded hover:bg-[#f59f0be3]"
+            className="w-full bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition"
           >
             {isSignUp ? 'Sign Up' : 'Sign In'}
           </button>

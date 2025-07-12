@@ -6,7 +6,7 @@ import {
   XAxis, 
   YAxis, 
   CartesianGrid, 
-  Tooltip, 
+  Tooltip,
   Legend,
   ResponsiveContainer,
   PieChart,
@@ -78,35 +78,53 @@ const IncomePage = ({ user }) => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Income Overview</h1>
-      <div className="bg-green-100 border-l-4 border-green-500 py-10 px-8 rounded shadow-md transition transform duration-500 ease-out hover:scale-105 mb-6">
-          <div className='flex gap-6 my-auto items-center'>
-              <span>
-                  <h3 className='text-sm text-gray-700'>Total Income</h3>
-                  <p className='text-xl font-bold text-green-700'>KES <CountUp start={0} end={totalIncome} duration={1.5} separator=',' /></p>
-              </span>
-          </div>
+      <h1 className="text-2xl text-gray-300 font-bold mb-6">Income Overview</h1>
+      <div className="bg-black/30 backdrop-blur-sm border border-green-400/40  rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300">
+        <div className="flex gap-6 my-auto items-center">
+          <span>
+            <h3 className="text-sm text-slate-500">Total Income</h3>
+            <p className="text-xl font-bold text-green-700">
+              KES{" "}
+              <CountUp
+                start={0}
+                end={totalIncome}
+                duration={1.5}
+                separator=","
+              />
+            </p>
+          </span>
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Monthly Income Chart */}
-        <div className="bg-white p-4 rounded-lg shadow">
-          <h2 className="text-lg font-semibold mb-4">Monthly Income</h2>
+        <div className="p-4 bg-black/30 border border-gray-500/40 text-white rounded-2xl  mt-4 shadow">
+          <h2 className="text-lg text-gray-200 font-semibold mb-4">
+            Monthly Income
+          </h2>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={monthlyData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="amount" fill="#00C49F" />
-              </BarChart>
-            </ResponsiveContainer>
+  <BarChart data={monthlyData} margin={{ top: 10, right: 30, left: 0, bottom: 5 }}>
+    <CartesianGrid stroke="rgba(255, 255, 255, 0.05)" />
+    <XAxis dataKey="name" stroke="#ccc" />
+    <YAxis 
+      stroke="#ccc" 
+      tickFormatter={(val) => `KES ${val.toLocaleString()}`} 
+    />
+    <Tooltip 
+      contentStyle={{ backgroundColor: "#1f2937", border: "none", borderRadius: "8px", color: "#fff" }}
+      labelStyle={{ color: "#9ca3af" }}
+    />
+    <Legend 
+      wrapperStyle={{ color: "#d1d5db" }}
+    />
+    <Bar dataKey="amount" fill="#00C49F" radius={[8, 8, 0, 0]} />
+  </BarChart>
+</ResponsiveContainer>
           </div>
         </div>
 
         {/* Category Distribution Chart */}
-        <div className="bg-white p-4 rounded-lg shadow">
+        <div className="p-4 bg-black/30 border border-gray-500/40 text-white rounded-2xl shadow-md mt-4">
           <h2 className="text-lg font-semibold mb-4">Income Sources</h2>
           <div className="h-80">
             <ResponsiveContainer width="100%" height="100%">
@@ -116,13 +134,18 @@ const IncomePage = ({ user }) => {
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  label={({ name, percent }) =>
+                    `${name} ${(percent * 100).toFixed(0)}%`
+                  }
                   outerRadius={80}
                   fill="#00C49F"
                   dataKey="value"
                 >
                   {categoryData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
                   ))}
                 </Pie>
                 <Tooltip />
@@ -131,21 +154,30 @@ const IncomePage = ({ user }) => {
           </div>
         </div>
       </div>
-      <div className="bg-white p-4 mt-6 rounded-xl shadow-md">
+      <div className="p-4 bg-black/30 border border-gray-500/40 text-white rounded-2xl shadow-md mt-4">
         <h2 className="text-lg font-semibold mb-4">Income Tranactions</h2>
         {income.length === 0 ? (
-          <p className='text-sm text-gray-500'>No income tranactions yet</p>
-        ): (
-          <ul className='divide-y divide-gray-300'>
+          <p className="text-sm text-gray-500">No income tranactions yet</p>
+        ) : (
+          <ul className=" divide-gray-300">
             {income.map((tx) => (
-              <li key={tx.id} className='py-3 flex justify-between items-start'>
+              <li
+                key={tx.id}
+                className="py-3 border-b border-gray-400/10 flex justify-between items-start"
+              >
                 <div>
-                  <p className='text-sm font-medium capitalize'>{tx.category}</p>
-                  <p className='text-xs text-gray-500 sentence-cap'>{tx.description}</p>
+                  <p className="text-sm font-medium capitalize">
+                    {tx.category}
+                  </p>
+                  <p className="text-xs text-gray-500 sentence-cap">
+                    {tx.description}
+                  </p>
                 </div>
-                <div className='text-right'>
-                  <p className='text-sm font-semibold text-green-600'>+ KES {tx.amount}</p>
-                  <p className='text-xs text-gray-400 mt-1'>
+                <div className="text-right">
+                  <p className="text-sm font-semibold text-green-600">
+                    + KES {tx.amount}
+                  </p>
+                  <p className="text-xs text-gray-400 mt-1">
                     {new Date(tx.created_at).toLocaleString()}
                   </p>
                 </div>
@@ -155,7 +187,7 @@ const IncomePage = ({ user }) => {
         )}
       </div>
     </div>
-  )
+  );
 }
 
 export default IncomePage

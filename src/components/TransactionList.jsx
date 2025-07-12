@@ -128,84 +128,98 @@ const TransactionList = ({ user }) => {
     }
 
   return (
-    <div className='p-4 bg-white rounded-2xl shadow-md mt-4'>
-        <div className='flex justify-between items-center mb-4'>
-            <h2 className='text-lg font-semibold '>Your Transactions</h2>
-            <ExportDropdown onExport={(format) => {
-                if (format === 'pdf') exportToPDF()
-                else if (format === 'xlsx') exportToExcel()
-                else if (format === 'csv') exportToCSV()
-            }} />
-        </div>
+    <div className="p-4 bg-black/30 border border-gray-500/40 text-white rounded-2xl shadow-md mt-4">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-semibold ">Your Transactions</h2>
+        <ExportDropdown
+          onExport={(format) => {
+            if (format === "pdf") exportToPDF();
+            else if (format === "xlsx") exportToExcel();
+            else if (format === "csv") exportToCSV();
+          }}
+        />
+      </div>
 
-        {/* filters */}
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-4 mb-4">
-            <input 
-                type="text"
-                placeholder='Search by category'
-                value={categoryFilter}
-                onChange={(e) => setCategoryFilter(e.target.value)}
-                className='border px-3 py-2 rounded' 
-            />
-            <input 
-                type="number"
-                placeholder='Min amount'
-                value={minAmount}
-                onChange={(e) => setMinAmount(e.target.value)}
-                className='border px-3 py-2 rounded' 
-            />
-            <input 
-                type="number"
-                placeholder='Max amount'
-                value={maxAmount}
-                onChange={(e) => setMaxAmount(e.target.value)}
-                className='border px-3 py-2 rounded' 
-            />
-            <input 
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                className='border px-3 py-2 rounded' 
-            />
-            <input 
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                className='border px-3 py-2 rounded' 
-            />
-            <button
-            onClick={handleReset}
-            className='bg-gray-200 text-sm rounded px-3 py-2 hover:bg-gray-200'
-            >Reset</button>
-        </div>
+      {/* filters */}
+      <div className="grid grid-cols-1 md:grid-cols-6 gap-4 mb-4">
+        <input
+          type="text"
+          placeholder="Search by category"
+          value={categoryFilter}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+          className="text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
+        />
+        <input
+          type="number"
+          placeholder="Min amount"
+          value={minAmount}
+          onChange={(e) => setMinAmount(e.target.value)}
+          className="text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
+        />
+        <input
+          type="number"
+          placeholder="Max amount"
+          value={maxAmount}
+          onChange={(e) => setMaxAmount(e.target.value)}
+          className="text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
+        />
+        <input
+          type="date"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+          className="text-gray-500 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
+        />
+        <input
+          type="date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+          className="text-gray-500 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
+        />
+        <button
+          onClick={handleReset}
+          className="bg-green-600 text-sm rounded-lg px-3 py-2 hover:bg-gray-200"
+        >
+          Reset
+        </button>
+      </div>
 
-
-        {filtered.length === 0 ? (
-            <p className='text-sm text-gray-500'> No transactions yet.</p>
-        ): (
-            <ul className='divide-y divide-gray-200'>
-                {filtered.map((tx) => (
-                    <li key={tx.id} className='py-3 flex justify-between items-center'>
-                        <div>
-                            <p className='text-sm font-medium capitalize'>{tx.category || 'Uncategorized'}</p>
-                            <p className='text-xs text-gray-500 sentence-cap'>{tx.description}</p>
-                        </div>
-                        <div className="text-right">
-                            <p className={`text-sm font-semibold ${tx.type == 'income' ? 'text-green-600' : 'text-red-500'}`}>
-                                {tx.type === 'income' ? '+' : '-'} KES {tx.amount}
-                            </p>
-                            {tx.created_at && (
-                                <p className='text-xs text-gray-400 mt-1\'>
-                                    {new Date(tx.created_at).toLocaleString()}
-                                </p>
-                            )}
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        )}
+      {filtered.length === 0 ? (
+        <p className="text-sm text-gray-500"> No transactions yet.</p>
+      ) : (
+        <ul className=" divide-gray-200">
+          {filtered.map((tx) => (
+            <li
+              key={tx.id}
+              className="py-3 border-b border-gray-200/10 flex justify-between items-center"
+            >
+              <div>
+                <p className="text-sm font-medium capitalize">
+                  {tx.category || "Uncategorized"}
+                </p>
+                <p className="text-xs text-gray-500 sentence-cap">
+                  {tx.description}
+                </p>
+              </div>
+              <div className="text-right">
+                <p
+                  className={`text-sm font-semibold ${
+                    tx.type == "income" ? "text-green-600" : "text-red-500"
+                  }`}
+                >
+                  {tx.type === "income" ? "+" : "-"} KES {tx.amount}
+                </p>
+                {tx.created_at && (
+                  <p className="text-xs text-gray-600 mt-1">
+                    {new Date(tx.created_at).toLocaleString()}
+                  </p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
-  )
+  );
 }
 
 export default TransactionList
