@@ -3,7 +3,6 @@ import {
   Mic, 
   BarChart3, 
   Calculator, 
-  Smartphone, 
   Globe, 
   Bell, 
   Shield, 
@@ -86,8 +85,8 @@ const LandingPage = () => {
             watch beautiful visuals, and stay on top of your financial goals.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <button onClick={()=> navigate('/auth')}  size="lg" className=" flex items-center hover:scale-105 text-lg px-8 py-2 rounded-lg bg-purple-500 text-gray-900">
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-12">
+            <button onClick={()=> navigate('/auth')}  size="lg" className="flex items-center hover:scale-105 text-lg px-8 py-2 rounded-lg bg-purple-500 text-gray-900">
               Start Budgeting <ArrowRight className="ml-2" />
             </button>
             <button size="lg" className="text-lg px-8 py-2 text-gray-100 rounded-lg hover:border-purple-500/40 border border-gray-500/50">
