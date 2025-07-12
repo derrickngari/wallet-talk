@@ -39,7 +39,7 @@ const ProfileDropdown = ({ fullName, onLogout }) => {
             <div className="absolute right-0 mt-8 w-48 p-4 bg-black/80 border border-gray-500/40 text-white rounded-2xl shadow-md overflow-hidden z-20">
                 <button
                     onClick={() => {
-                        navigate('/profile')
+                        navigate('/dashboard/profile')
                         setOpen(false)
                     }}
                     className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
