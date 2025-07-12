@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   HomeIcon,
@@ -16,6 +16,7 @@ import logo from '../assets/wallet-talk-logo.svg';
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const location = useLocation();
+  const sideBarRef = useRef(null)
 
   const menuItems = [
     { path: '/dashboard', icon: HomeIcon, label: 'Dashboard' },
@@ -27,8 +28,21 @@ const Sidebar = () => {
     { path: '/pricing', icon: CreditCardIcon, label: 'Pricing' },
   ];
 
+  useEffect(()=> {
+    const handleClickOutside = (e) => {
+        if (sideBarRef.current && !sideBarRef.current.contains(e.target) && !isCollapsed){
+            setIsCollapsed(true)
+        }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [isCollapsed]);
+
   return (
-    <div className={`bg-black/90 h-screen border-r border-gray-400/5 shadow-lg transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-48 absolute md:relative z-40'}`}>
+    <div ref={sideBarRef} className={`bg-black/90 h-screen border-r border-gray-400/5 shadow-lg transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-48 absolute md:relative z-40'}`}>
       <div className="p-4 flex justify-end">
         <img
           src={logo}
