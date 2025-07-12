@@ -147,33 +147,33 @@ const TransactionList = ({ user }) => {
           placeholder="Search by category"
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
-          className="text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
+          className="w-full text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
         />
         <input
           type="number"
           placeholder="Min amount"
           value={minAmount}
           onChange={(e) => setMinAmount(e.target.value)}
-          className="text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
+          className="w-full text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
         />
         <input
           type="number"
           placeholder="Max amount"
           value={maxAmount}
           onChange={(e) => setMaxAmount(e.target.value)}
-          className="text-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
+          className="w-fulltext-gray-400 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
         />
         <input
           type="date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
-          className="text-gray-500 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
+          className="w-full text-gray-500 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
         />
         <input
           type="date"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
-          className="text-gray-500 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
+          className="w-full text-gray-500 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
         />
         <button
           onClick={handleReset}

@@ -30,7 +30,7 @@ const ProfileDropdown = ({ fullName, onLogout }) => {
     <div className="relative" ref={dropDownRef}>
         <button
             onClick={()=> setOpen(!open)}
-            className="w-10 h-10 rounded-full absolute right-0 top-[-15px] bg-purple-600 text-gray-300 font-bold flex items-center justify-center focus:outline-none"
+            className="w-10 h-10 rounded-full absolute right-0 top-[-25px] bg-purple-600 text-gray-300 font-bold flex items-center justify-center focus:outline-none"
             title="Profile"
         >
             {initials}

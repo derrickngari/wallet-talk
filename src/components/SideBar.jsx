@@ -28,7 +28,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className={`bg-black/10 h-screen border-r border-gray-400/5 shadow-lg transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-48 absolute md:relative z-40'}`}>
+    <div className={`bg-black/90 h-screen border-r border-gray-400/5 shadow-lg transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-48 absolute md:relative z-40'}`}>
       <div className="p-4 flex justify-end">
         <img
           src={logo}
