@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../services/supabase'
 import { toast } from 'react-toastify'
+import SplashScreen from '../components/SplashScreen';
 
 const ProfilePage = ({ user }) => {
   const [profile, setProfile] = useState({
@@ -65,7 +66,7 @@ const ProfilePage = ({ user }) => {
     }
   };
 
-  if (isLoading) return <p className='p-6'>Loading...</p>;
+  if (isLoading) return <SplashScreen />;
 
   return (
     <div className='p-6 max-w-lg mx-auto bg-black/30 border border-gray-500/40 text-gray-300 rounded shadow'>
