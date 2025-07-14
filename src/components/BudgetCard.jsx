@@ -15,7 +15,7 @@ const BudgetCard = ({ spent, b, percent }) => {
             />
         </div>
         <p className="text-xs text-gray-500 mt-1 py-2 mx-auto">
-            KES {spent} spent - {percent}% used
+            KES {spent} spent - {percent.toFixed(0)}% used
         </p>
     </div>
   )

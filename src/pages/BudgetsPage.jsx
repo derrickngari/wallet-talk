@@ -110,9 +110,11 @@ const BudgetsPage = ({ user, refreshCount }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {budgets.map((b) => {
           const spent = getSpentAmount(b.category);
-          const percent = Math.min((spent / b.amount) * 100, 100).toFixed(0);
+          // const percent = Math.min((spent / b.amount) * 100, 100).toFixed(0);
+          const percent = b.amount === 0 ? 0 : Math.min((spent / b.amount) * 100, 100);
 
-          return <BudgetCard spent={spent} percent={percent} b={b} />;
+
+          return <BudgetCard key={(b.id)} spent={spent} percent={percent} b={b} />;
         })}
       </div>
     </div>
