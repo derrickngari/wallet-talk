@@ -39,3 +39,48 @@ export const getTransactions = async (userId) => {
 
         return data
 }
+
+export const getTransactionById = async (transactionId, userId) => {
+    const { data, error } = await supabase
+        .from('transactions')
+        .select('*')
+        .eq('id', transactionId)
+        .eq('user_id', userId)
+        .single()
+
+        if (error) {
+            console.error('Failed to get transaction:', error.message);
+            return []
+        }
+
+        return data
+    }
+
+    export const deleteTransaction = async (transactionId, userId) => {
+        const { error } = await supabase
+            .from('transactions')
+            .delete()
+            .eq('id', transactionId)
+            .eq('user_id', userId)
+
+        if (error) {
+            console.error('Failed to delete transaction:', error.message);
+            return []
+        }
+
+        return
+    }
+
+    export const updateTrasnaction = async (transactionId, userId, transactionData) => {
+        const { error } = await supabase
+            .from('transactions')
+            .update(transactionData)
+            .eq('id', transactionId)
+            .eq('user_id', userId)
+
+        if (error){
+            console.error('Failed to update transaction:', error.message);
+            return []
+        }
+        return
+    }

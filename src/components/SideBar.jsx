@@ -25,7 +25,6 @@ const Sidebar = () => {
     { path: '/dashboard/budgets', icon: BanknotesIcon, label: 'Budgets' },
     { path: '/dashboard/savings', icon: InboxStackIcon, label: 'Savings' },
     { path: '/dashboard/investments', icon: CurrencyDollarIcon, label: 'Investments' },
-    { path: '/pricing', icon: CreditCardIcon, label: 'Pricing' },
   ];
 
   useEffect(()=> {

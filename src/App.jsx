@@ -24,6 +24,7 @@ import ProfilePage from "./pages/ProfilePage";
 
 import { Toaster } from "react-hot-toast"
 import {toast} from 'react-hot-toast'
+import TransactionItem from "./pages/TransactionItem";
 
 function App() {
   const navigate = useNavigate();
@@ -158,6 +159,7 @@ function App() {
               element={<InvestmentsPage user={user} />}
             />
             <Route path="profile" element={<ProfilePage user={user} />} />
+            <Route path="transactions/:id" element={<TransactionItem user={user} />} />
           </Route>
         )}
 

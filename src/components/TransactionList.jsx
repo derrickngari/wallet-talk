@@ -4,6 +4,7 @@ import ExportDropdown from './ExportDropdown'
 import * as XLSX from 'xlsx'
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
+import { useNavigate, Link } from 'react-router-dom';
 
 const TransactionList = ({ user }) => {
     const [transactions, setTransactions] = useState([])
@@ -14,6 +15,8 @@ const TransactionList = ({ user }) => {
     const [maxAmount, setMaxAmount] = useState('')
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
@@ -167,11 +170,13 @@ const TransactionList = ({ user }) => {
           type="date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
+          placeholder="Start Date"
           className="w-full text-gray-500 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
         />
         <input
           type="date"
           value={endDate}
+          placeholder="End Date"
           onChange={(e) => setEndDate(e.target.value)}
           className="w-full text-gray-500 border border-gray-500/30 text-sm bg-gray-900 px-2 py-1 rounded"
         />
@@ -188,32 +193,34 @@ const TransactionList = ({ user }) => {
       ) : (
         <ul className=" divide-gray-200">
           {filtered.map((tx) => (
-            <li
-              key={tx.id}
-              className="py-3 border-b border-gray-200/10 flex justify-between items-center"
-            >
-              <div>
-                <p className="text-sm font-medium capitalize">
-                  {tx.category || "Uncategorized"}
-                </p>
-                <p className="text-xs text-gray-500 sentence-cap">
-                  {tx.description}
-                </p>
-              </div>
-              <div className="text-right">
-                <p
-                  className={`text-sm font-semibold ${
-                    tx.type == "income" ? "text-green-600" : "text-red-500"
-                  }`}
-                >
-                  {tx.type === "income" ? "+" : "-"} KES {tx.amount}
-                </p>
-                {tx.created_at && (
-                  <p className="text-xs text-gray-600 mt-1">
-                    {new Date(tx.created_at).toLocaleString()}
+            <li key={tx.id}>
+              <Link
+                to={`/dashboard/transactions/${tx.id}`}
+                className="py-3 border-b border-gray-200/10 flex justify-between items-center"
+              >
+                <div>
+                  <p className="text-sm font-medium capitalize">
+                    {tx.category || "Uncategorized"}
                   </p>
-                )}
-              </div>
+                  <p className="text-xs text-gray-500 sentence-cap">
+                    {tx.description}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p
+                    className={`text-sm font-semibold ${
+                      tx.type == "income" ? "text-green-600" : "text-red-500"
+                    }`}
+                  >
+                    {tx.type === "income" ? "+" : "-"} KES {tx.amount}
+                  </p>
+                  {tx.created_at && (
+                    <p className="text-xs text-gray-600 mt-1">
+                      {new Date(tx.created_at).toLocaleString()}
+                    </p>
+                  )}
+                </div>
+              </Link>
             </li>
           ))}
         </ul>
