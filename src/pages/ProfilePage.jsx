@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { supabase } from '../services/supabase'
-import { toast } from 'react-toastify'
+import { toast } from 'react-hot-toast'
 import SplashScreen from '../components/SplashScreen';
 
 const ProfilePage = ({ user }) => {
