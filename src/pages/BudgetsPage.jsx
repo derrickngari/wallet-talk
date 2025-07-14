@@ -64,8 +64,8 @@ const BudgetsPage = ({ user, refreshCount }) => {
 
   const getSpentAmount = (category) => {
     return expenses
-      .filter((exp) => exp.category === category)
-      .reduce((sum, exp) => sum + exp.amount, 0)
+      .filter((exp) => exp.category.toLowerCase() === category.toLowerCase())
+      .reduce((sum, exp) => sum + parseFloat(exp.amount), 0)
   }
 
   return (
